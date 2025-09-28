@@ -1,17 +1,25 @@
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
+
+import { ThemedView } from "../components/ThemedView";
+import { ThemedText } from "../components/ThemedText";
+import { ThemedButton } from "../components/ThemedButton";
+import { useTheme } from "../ThemeContext";
 
 export default function Page() {
   const router = useRouter();
+  const { toggleTheme } = useTheme();
+
   return (
-    <View style={styles.container}>
-      <View style={styles.main}>
-        <Text style={styles.title}>Дмитро Чапни</Text>
-        <Text style={styles.subtitle}>18 років</Text>
-        <Text style={styles.subtitle}>Середня Освіта</Text>
-      </View>
-      <Button title="Хоббі" onPress={() => router.push('/hobbies')} />
-    </View>
+    <ThemedView style={styles.container}>
+      <ThemedView style={styles.main}>
+        <ThemedText style={styles.title}>Дмитро Чапни</ThemedText>
+        <ThemedText style={styles.subtitle}>18 років</ThemedText>
+        <ThemedText style={styles.subtitle}>Середня Освіта</ThemedText>
+      </ThemedView>
+      <ThemedButton title="Хоббі" onPress={() => router.push('/hobbies')} />
+      <ThemedButton title="Змінити Тему" onPress={toggleTheme} />
+    </ThemedView>
   );
 }
 
@@ -32,7 +40,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   subtitle: {
-    fontSize: 36,
-    color: "#38434D",
+    fontSize: 36
   },
 });

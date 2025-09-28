@@ -1,19 +1,27 @@
 import { StyleSheet, Text, View, Button } from "react-native";
 import { useRouter } from "expo-router";
 
+import { ThemedView } from "../components/ThemedView";
+import { ThemedText } from "../components/ThemedText";
+import { ThemedButton } from "../components/ThemedButton";
+import { useTheme } from "../ThemeContext";
+
 export default function Page() {
-    const router = useRouter();
-    return (
-        <View style={styles.container}>
-            <View style={styles.main}>
-                <Text style={styles.title}>Хоббі</Text>
-                <Text style={styles.subtitle}>Програмування</Text>
-                <Text style={styles.subtitle}>Малювання</Text>
-                <Text style={styles.subtitle}>Музика</Text>
-            </View>
-            <Button title="Назад" onPress={() => router.push('/')} />
-        </View>
-    );
+  const router = useRouter();
+  const { toggleTheme } = useTheme();
+
+  return (
+    <ThemedView style={styles.container}>
+      <ThemedView style={styles.main}>
+        <ThemedText style={styles.title}>Хоббі</ThemedText>
+        <ThemedText style={styles.subtitle}>Програмування</ThemedText>
+        <ThemedText style={styles.subtitle}>Малювання</ThemedText>
+        <ThemedText style={styles.subtitle}>Музика</ThemedText>
+      </ThemedView>
+      <ThemedButton title="Назад" onPress={() => router.back()} />
+      <ThemedButton title="Змінити Тему" onPress={toggleTheme} />
+    </ThemedView>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -33,7 +41,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   subtitle: {
-    fontSize: 36,
-    color: "#38434D",
+    fontSize: 36
   },
 });
